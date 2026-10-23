@@ -1,0 +1,75 @@
+# Quality gates for the vocabulary, in SHACL.
+# Governance by design, made executable:
+#   - every term has one Italian and one English label, a lifecycle status, and belongs to the vocabulary;
+#   - an approved term must have a real definition, a public source and a steward;
+#   - drafts get the same checks as warnings, so the validation report doubles as a to-do list.
+# The oes: namespace below is mapped by scripts/validate.py to the one declared in core.ttl:
+# you do not need to edit it here.
+
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix oes:  <https://TUO-UTENTE.github.io/open-energy-steward/ontology/core#> .
+@prefix oesh: <urn:open-energy-steward:shapes:> .
+
+# Every governed term: any node with a lifecycle status.
+oesh:TermShape a sh:NodeShape ;
+    sh:targetSubjectsOf oes:status ;
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 2 ;
+        sh:languageIn ( "it" "en" ) ;
+        sh:uniqueLang true ;
+        sh:message "Needs exactly one Italian and one English preferred label." ;
+    ] ;
+    sh:property [
+        sh:path oes:status ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ( oes:proposed oes:approved oes:deprecated ) ;
+        sh:message "Needs one lifecycle status: proposed, approved or deprecated." ;
+    ] ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:hasValue oes:Vocabulary ;
+        sh:message "Must belong to the vocabulary (skos:inScheme oes:Vocabulary)." ;
+    ] .
+
+# What a complete term looks like.
+oesh:CompleteTerm a sh:NodeShape ;
+    sh:property [ sh:path skos:definition ; sh:minCount 1 ; sh:pattern "^(?!TODO)" ] ;
+    sh:property [ sh:path dct:source ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path oes:steward ; sh:minCount 1 ] .
+
+# Approved terms must be complete.
+oesh:ApprovedTermShape a sh:NodeShape ;
+    sh:targetSubjectsOf oes:status ;
+    sh:or (
+        [ sh:path oes:status ; sh:in ( oes:proposed oes:deprecated ) ]
+        [ sh:node oesh:CompleteTerm ]
+    ) ;
+    sh:message "An approved term needs a real definition, a public source and a steward." .
+
+# Drafts: the same checks, as warnings.
+oesh:DraftTermShape a sh:NodeShape ;
+    sh:targetSubjectsOf oes:status ;
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:pattern "^(?!TODO)" ;
+        sh:severity sh:Warning ;
+        sh:message "Definition still to write, from a public source." ;
+    ] ;
+    sh:property [
+        sh:path dct:source ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:severity sh:Warning ;
+        sh:message "Public source missing: link the document that defines the term." ;
+    ] ;
+    sh:property [
+        sh:path oes:steward ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "Steward missing: who is accountable for this definition?" ;
+    ] .

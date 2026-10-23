@@ -1,0 +1,10 @@
+# CQ2: What is the difference between MGP, MI and MSD, and who runs each market?
+# Answered when each market is linked to its operator with oes:operatedBy (to model in v0.1).
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?market ?market_label ?operator ?operator_label WHERE {
+  ?market oes:operatedBy ?operator ;
+          skos:prefLabel ?market_label .
+  ?operator skos:prefLabel ?operator_label .
+  FILTER (lang(?market_label) = "it" && lang(?operator_label) = "it")
+}

@@ -1,0 +1,13 @@
+# CQ3: What is the current definition of a given term, and which public source does it come from?
+# Answered when terms have a real definition and a source.
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dct:  <http://purl.org/dc/terms/>
+
+SELECT ?term ?label ?definition ?source ?status WHERE {
+  ?term oes:status ?status ;
+        skos:prefLabel ?label ;
+        skos:definition ?definition ;
+        dct:source ?source .
+  FILTER (lang(?label) = "it")
+  FILTER (!STRSTARTS(STR(?definition), "TODO"))
+}

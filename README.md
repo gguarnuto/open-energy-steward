@@ -64,9 +64,32 @@ open-energy-steward/
 ├── graph/         knowledge graph build (v0.2)
 ├── mcp-server/    MCP server (v0.2)
 ├── agent/         agent and audit log (Demo)
-├── evals/         competency questions and test cases
+├── evals/         competency questions, as YAML and SPARQL
+├── scripts/       validation
+├── tests/         quality gates run by CI
 └── data/          download scripts only, no raw data
 ```
+
+## Quick start
+
+```bash
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+python scripts/validate.py       # quality gates and competency question coverage
+pytest -q                        # the same checks CI runs on every push
+```
+
+To query the vocabulary from Claude Desktop or Claude Code, see [mcp-server/](mcp-server/).
+
+## Quality gates
+
+Governance by design is executable here. On every push, GitHub Actions runs:
+
+- **SHACL shapes** ([ontology/shapes.ttl](ontology/shapes.ttl)): every term needs one Italian and one English label and a lifecycle status; an approved term also needs a real definition, a public source and a steward. Drafts get the same checks as warnings, so the report doubles as a to-do list.
+- **Competency questions as tests** ([evals/cq/](evals/cq/)): each question has a SPARQL query. Once the vocabulary answers it, it is added to the enforced list in [tests/test_quality.py](tests/test_quality.py), and CI keeps it answered.
+
+The architecture is described in [docs/architecture.md](docs/architecture.md).
 
 ## Data and sources
 
