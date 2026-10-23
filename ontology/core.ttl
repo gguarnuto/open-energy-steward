@@ -3,7 +3,7 @@
 # Pattern: every concept has Italian and English labels, a public source,
 # a steward and a lifecycle status (proposed, approved, deprecated).
 
-@prefix oes:  <https://@gguarnuto.github.io/open-energy-steward/ontology/core#> .
+@prefix oes:  <https://gguarnuto.github.io/open-energy-steward/ontology/core#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
