@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.ipynb_checkpoints/
+
+# Data: raw and processed downloads are never committed
+data/raw/
+data/processed/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,73 @@
+# Open Energy Steward: core ontology (skeleton for v0.1)
+# Namespace: replace TUO-UTENTE with your GitHub username.
+# Pattern: every concept has Italian and English labels, a public source,
+# a steward and a lifecycle status (proposed, approved, deprecated).
+
+@prefix oes:  <https://TUO-UTENTE.github.io/open-energy-steward/ontology/core#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+oes: a owl:Ontology ;
+    dct:title "Open Energy Steward: core"@en , "Open Energy Steward: nucleo"@it ;
+    dct:description "Minimal ontology of the Italian electricity market and dispatching, built from public sources and driven by competency questions."@en ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+    owl:versionInfo "0.1.0-draft" .
+
+# ---------- Governance by design ----------
+
+oes:steward a owl:AnnotationProperty ;
+    rdfs:label "steward"@en , "responsabile"@it ;
+    rdfs:comment "Person accountable for the definition of a concept."@en .
+
+oes:status a owl:AnnotationProperty ;
+    rdfs:label "lifecycle status"@en , "stato"@it ;
+    rdfs:comment "Where the concept is in its lifecycle."@en .
+
+oes:LifecycleStatus a skos:ConceptScheme ;
+    skos:prefLabel "Lifecycle status"@en , "Stato del ciclo di vita"@it .
+
+oes:proposed a skos:Concept ;
+    skos:inScheme oes:LifecycleStatus ;
+    skos:prefLabel "proposed"@en , "proposto"@it .
+
+oes:approved a skos:Concept ;
+    skos:inScheme oes:LifecycleStatus ;
+    skos:prefLabel "approved"@en , "approvato"@it .
+
+oes:deprecated a skos:Concept ;
+    skos:inScheme oes:LifecycleStatus ;
+    skos:prefLabel "deprecated"@en , "deprecato"@it .
+
+# ---------- Vocabulary ----------
+
+oes:Vocabulary a skos:ConceptScheme ;
+    skos:prefLabel "Italian electricity market and dispatching"@en ,
+                   "Mercato elettrico e dispacciamento in Italia"@it ;
+    skos:hasTopConcept oes:ElectricityMarket , oes:Dispatching .
+
+# Example concepts: definitions and sources are TODO.
+# Point dct:source to the specific public document (resolution, rule, grid code section).
+
+oes:ElectricityMarket a skos:Concept ;
+    skos:inScheme oes:Vocabulary ;
+    skos:topConceptOf oes:Vocabulary ;
+    skos:prefLabel "electricity market"@en , "mercato elettrico"@it ;
+    skos:definition "TODO: definition from a public source."@en ;
+    oes:status oes:proposed .
+
+oes:DayAheadMarket a skos:Concept ;
+    skos:inScheme oes:Vocabulary ;
+    skos:broader oes:ElectricityMarket ;
+    skos:prefLabel "day-ahead market"@en , "Mercato del Giorno Prima"@it ;
+    skos:altLabel "MGP"@it ;
+    skos:definition "TODO: definition from a public source."@en ;
+    oes:status oes:proposed .
+
+oes:Dispatching a skos:Concept ;
+    skos:inScheme oes:Vocabulary ;
+    skos:topConceptOf oes:Vocabulary ;
+    skos:prefLabel "dispatching"@en , "dispacciamento"@it ;
+    skos:definition "TODO: definition from a public source."@en ;
+    oes:status oes:proposed .

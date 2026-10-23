@@ -1,0 +1,37 @@
+# Competency questions for the public version.
+# Drafts: refine and validate them in v0.1. Every test case in this folder refers to one of them.
+
+- id: CQ1
+  question_it: "Quali delibere ARERA definiscono o modificano le regole sugli sbilanciamenti, e quali concetti toccano?"
+  question_en: "Which ARERA resolutions define or change the imbalance rules, and which concepts do they affect?"
+  answer: list of documents and concepts, each with its source
+  sources: [ARERA]
+  status: draft
+
+- id: CQ2
+  question_it: "Che differenza c'è tra MGP, MI e MSD, e chi gestisce ciascun mercato?"
+  question_en: "What is the difference between MGP, MI and MSD, and who runs each market?"
+  answer: short comparison with the operator of each market and its source
+  sources: [GME, Terna, ARERA]
+  status: draft
+
+- id: CQ3
+  question_it: "Qual è la definizione corrente di un termine, e da quale fonte pubblica viene?"
+  question_en: "What is the current definition of a given term, and which public source does it come from?"
+  answer: definition, source document and section, lifecycle status
+  sources: [ARERA, GME, Terna]
+  status: draft
+
+- id: CQ4
+  question_it: "Se cambia una regola di mercato, quali concetti, attori e obblighi ne sono toccati?"
+  question_en: "If a market rule changes, which concepts, actors and obligations are affected?"
+  answer: impact list traced through the graph, with sources
+  sources: [ARERA, GME, Terna]
+  status: draft
+
+- id: CQ5
+  question_it: "Cosa deve sapere un nuovo operatore per seguire una giornata di mercato, dalle offerte al dispacciamento?"
+  question_en: "What does a newcomer need to know to follow a market day, from bids to dispatching?"
+  answer: ordered path of concepts and documents
+  sources: [GME, Terna]
+  status: draft
