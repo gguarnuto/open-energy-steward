@@ -9,7 +9,7 @@
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix dct:  <http://purl.org/dc/terms/> .
-@prefix oes:  <https://TUO-UTENTE.github.io/open-energy-steward/ontology/core#> .
+@prefix oes:  <https://gguarnuto.github.io/open-energy-steward/ontology/core#> .
 @prefix oesh: <urn:open-energy-steward:shapes:> .
 
 # Every governed term: any node with a lifecycle status.
